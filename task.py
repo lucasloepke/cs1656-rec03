@@ -10,13 +10,19 @@ class Task(object):
         self.df = pd.read_csv('bank-data.csv')
 
     def t1(self):
-        return None
+        pdf = self.df[['sex', 'income']]
+        return pdf.groupby('sex')['income'].mean()
 
     def t2(self):
-        return None
+        return pd.crosstab(self.df["save_act"],self.df["mortgage"],margins=True)
 
     def t3(self):
-        return None
+        df_crosstab = self.t2()
+        def get_percent(group):
+            x= (group / group['All'])
+            return x
+
+        return df_crosstab.apply(get_percent, axis=1)
 
 if __name__ == "__main__":
     t = Task()
