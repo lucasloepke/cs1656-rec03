@@ -19,7 +19,7 @@ class Task(object):
     def t3(self):
         df_crosstab = self.t2()
         def get_percent(group):
-            x= (group / group['All']).round(2)
+            x = group / df_crosstab.loc['All', 'All']
             return x
 
         return df_crosstab.apply(get_percent, axis=1)
